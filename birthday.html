@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Slideshow</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #f0f8ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .slideshow-container {
+      position: relative;
+      max-width: 800px;
+      width: 100%;
+      margin: 40px auto;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-size: cover;
+    }
+    /* Each slide */
+    .slide {
+      display: none;
+      position: relative;
+    }
+    /* Images in slides */
+    .slide img {
+      width: 100%;
+      vertical-align: middle;
+      border-radius: 10px;
+      height: auto;
+    }
+    /* Text overlay on slides */
+    .slide-text {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      width: 100%;
+      padding: 16px;
+      font-size: 1.6em;
+      border-radius: 0 0 10px 10px;
+    }
+    /* Fade animation */
+    .fade {
+      animation-name: fade;
+      animation-duration: 1s;
+    }
+    @keyframes fade {
+      from { opacity: 0.4; }
+      to { opacity: 1; }
+    }
+    /* Navigation dots */
+    .dot-container {
+      text-align: center;
+      padding: 20px 0;
+      background: #e9ecef;
+    }
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 4px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+      transition: background-color 0.6s ease;
+    }
+    .dot.active {
+      background-color: #717171;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background music without controls; it autoplays, loops, and preloads -->
+  <audio id="bgMusic" src="kumar.mp3" control></audio>
+
+  <!-- Slideshow container -->
+  <div class="slideshow-container">
+    <!-- Slide 1 -->
+    <div class="slide fade">
+      <img src="sharma.jpg" alt="Birthday Celebration 1">
+      <div class="slide-text">
+        <h3>Happy Birthday! Wishing you a day filled with love and joy!</h3>
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="slide fade">
+      <img src="vivek.jpg" alt="Birthday Celebration 2">
+      <div class="slide-text">
+        <h3>May your day be as bright as your smile.</h3>
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="slide fade">
+      <img src="kk.jpg" alt="Birthday Celebration 3">
+      <div class="slide-text">
+        <h3>Cheers to another year full of wonderful memories!</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation dots -->
+  <div class="dot-container">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+
+  <script>
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("slide");
+    const dots = document.getElementsByClassName("dot");
+
+    // Function to show slides one after the other
+    function showSlides() {
+      // Hide all slides
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1;
+      }
+      
+      // Remove active state from all dots
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].classList.remove("active");
+      }
+      
+      // Display the current slide and set the corresponding dot as active
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].classList.add("active");
+      
+      // Change slide every 4 seconds
+      setTimeout(showSlides, 4000);
+    }
+
+    // Function to navigate to a specific slide when a dot is clicked
+    function currentSlide(n) {
+      slideIndex = n - 1;
+      showSlides();
+    }
+
+    // Start the slideshow once the document is fully loaded
+    document.addEventListener("DOMContentLoaded", showSlides);
+  </script>
+</body>
+</html>
